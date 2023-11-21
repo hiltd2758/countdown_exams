@@ -1,34 +1,26 @@
-function countdown() {
-    // Lấy ngày hiện tại
-    const now = new Date();
-  
-    // Lấy ngày thi THPT Quốc gia
-    const examDate = new Date("2024-07-07");
-  
-    // Tính toán số ngày còn lại
-    const days = (examDate - now) / (1000 * 60 * 60 * 24);
-  
-    // Tính toán số giờ còn lại
-    const hours = (days - Math.floor(days)) * 24;
-  
-    // Tính toán số phút còn lại
-    const minutes = (hours - Math.floor(hours)) * 60;
-  
-    // Tính toán số giây còn lại
-    const seconds = (minutes - Math.floor(minutes)) * 60;
-  
-    // Cập nhật phần tử `countdown`
-    document.getElementById("countdown").innerHTML = `
-      <div class="days">${days}</div>
-      <div class="hours">${hours}</div>
-      <div class="minutes">${minutes}</div>
-      <div class="seconds">${seconds}</div>
-    `;
-  
-    // Lặp lại hàm sau mỗi giây
-    setTimeout(countdown, 1000);
+// Set the date you're counting down to
+const countDownDate = new Date("June 3, 2024 00:00:00").getTime();
+
+// Update the countdown every 1 second
+const x = setInterval(function() {
+  // Get the current date and time
+  const now = new Date().getTime();
+
+  // Calculate the distance between now and the countdown date
+  const distance = countDownDate - now;
+
+  // Calculate days, hours, minutes, and seconds
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result
+  console.log(`${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`);
+
+  // If the countdown is over, display a message
+  if (distance < 0) {
+    clearInterval(x);
+    console.log("Countdown expired");
   }
-  
-  // Chạy hàm đếm ngược khi trang web được tải
-  window.onload = countdown;
-  
+}, 1000);
